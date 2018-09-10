@@ -1,0 +1,12 @@
+USE annovar;
+
+CREATE TABLE hg19_revel
+(
+    chr VARCHAR,
+    start BIGINT,
+    end BIGINT,
+    ref VARCHAR,
+    alt VARCHAR,
+    revel DECIMAL(20,8),
+    PRIMARY KEY (ref, alt, revel)
+)
