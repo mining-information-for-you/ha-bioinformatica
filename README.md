@@ -8,6 +8,9 @@ Repositório destinado a armazenar os scripts de ETL de datasets de sequenciamen
 
 `[nome_dataset]/src`: Nesse diretório serão armazenados os scripts de ETL do dataset em questão.
 
+`[nome_dataset]/CassandraDB`: Nesse diretório serão armazenados os scripts com a estrutura de armazenamento no banco de 
+dados Cassandra.
+
 ## Datasets Disponibilizados
 
 [Annovar](http://annovar.openbioinformatics.org/en/latest/) - ANNOVAR is an efficient software tool to utilize 
