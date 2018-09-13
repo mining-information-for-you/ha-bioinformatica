@@ -3,8 +3,8 @@ USE annovar;
 CREATE TABLE hg19_gnomad_exome
 (
     chr VARCHAR,
-    start BIGINT,
-    end BIGINT,
+    start INT,
+    end INT,
     ref VARCHAR,
     alt VARCHAR,
     gnomad_exome_all VARCHAR,

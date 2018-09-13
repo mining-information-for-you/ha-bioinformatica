@@ -3,10 +3,10 @@ USE annovar;
 CREATE TABLE hg19_mcap
 (
   char VARCHAR,
-  start BIGINT,
-  end BIGINT,
+  start INT,
+  end INT,
   ref VARCHAR,
   alt VARCHAR,
-  mcap DECIMAL(32, 20),
+  mcap DECIMAL,
   PRIMARY KEY(ref, alt, mcap)
 )

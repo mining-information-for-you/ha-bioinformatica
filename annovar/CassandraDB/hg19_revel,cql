@@ -3,10 +3,10 @@ USE annovar;
 CREATE TABLE hg19_revel
 (
     chr VARCHAR,
-    start BIGINT,
-    end BIGINT,
+    start INT,
+    end INT,
     ref VARCHAR,
     alt VARCHAR,
-    revel DECIMAL(20,8),
+    revel DECIMAL,
     PRIMARY KEY (ref, alt, revel)
 )
