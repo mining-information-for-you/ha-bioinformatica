@@ -1,8 +1,8 @@
-USE annovar;
+USE sequence_databases;
 
 CREATE TABLE hg19_clinvar
 (
-  chr VARCHAR,
+  chromosome VARCHAR,
   start INT,
   end INT,
   ref VARCHAR,
@@ -12,5 +12,5 @@ CREATE TABLE hg19_clinvar
   clnacc VARCHAR,
   clndsdb VARCHAR,
   clndsdbid VARCHAR,
-  PRIMARY KEY(clnacc, clndsdb, clndsdbid)
-)
+  PRIMARY KEY((chromosome, ref, alt), start, end, clndsdb, clndsdbid)
+);

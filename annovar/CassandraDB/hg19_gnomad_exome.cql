@@ -1,8 +1,8 @@
-USE annovar;
+USE sequence_databases;
 
 CREATE TABLE hg19_gnomad_exome
 (
-    chr VARCHAR,
+    chromosome VARCHAR,
     start INT,
     end INT,
     ref VARCHAR,
@@ -16,6 +16,6 @@ CREATE TABLE hg19_gnomad_exome
     gnomad_exome_nfe VARCHAR,
     gnomad_exome_oth VARCHAR,
     gnomad_exome_sas VARCHAR,
-    PRIMARY KEY (ref, alt, gnomad_exome_all, gnomad_exome_afr, gnomad_exome_amr, gnomad_exome_asj, gnomad_exome_eas,
+    PRIMARY KEY ((chromosome, ref, alt), start, end, gnomad_exome_all, gnomad_exome_afr, gnomad_exome_amr, gnomad_exome_asj, gnomad_exome_eas,
     gnomad_exome_fin, gnomad_exome_nfe, gnomad_exome_oth, gnomad_exome_sas)
-)
+);

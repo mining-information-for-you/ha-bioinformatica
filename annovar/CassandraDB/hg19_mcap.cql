@@ -1,12 +1,12 @@
-USE annovar;
+USE sequence_databases;
 
 CREATE TABLE hg19_mcap
 (
-  char VARCHAR,
+  chromosome VARCHAR,
   start INT,
   end INT,
   ref VARCHAR,
   alt VARCHAR,
   mcap DECIMAL,
-  PRIMARY KEY(ref, alt, mcap)
-)
+  PRIMARY KEY((chromosome, ref, alt), start, end, mcap)
+);
