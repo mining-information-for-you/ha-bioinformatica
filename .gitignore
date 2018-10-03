@@ -1,4 +1,6 @@
 .idea/
+annovar/data/
+metastore_db/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

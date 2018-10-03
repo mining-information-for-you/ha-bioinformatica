@@ -1,0 +1,1 @@
+CREATE KEYSPACE sequence_databases WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor' : 1};
