@@ -1,7 +1,11 @@
 from pyspark.sql import SparkSession
 
 def get_spark_session(appName = "MI4U"):
-    spark = SparkSession.builder.appName(appName).getOrCreate()
+    spark = SparkSession.builder\
+                        .appName(appName)\
+                        .config("spark.jars.packages", "com.datastax.spark:spark-cassandra-connector_2.11:2.3.2")\
+                        .config("spark.cassandra.connection.host", "127.0.0.1")\
+                        .getOrCreate()
 
     return spark
 
@@ -23,7 +27,12 @@ def run_abraom_etl():
                                     abraom_cegh_filter \
                             FROM hg19_abraom")
 
-    hg19_abraom.write.format("org.apache.spark.sql.cassandra").mode("append").options(table="hg19_abraom", keyspace="sequence_databases").save()
+    hg19_abraom.write\
+               .format("org.apache.spark.sql.cassandra")\
+               .mode("append")\
+               .options(table="hg19_abraom", keyspace="sequence_databases")\
+               .save()
+
     spark.stop()
 
 
