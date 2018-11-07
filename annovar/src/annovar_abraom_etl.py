@@ -2,19 +2,20 @@ from pyspark.sql import SparkSession
 
 def get_spark_session(appName = "MI4U"):
     spark = SparkSession.builder\
-                        .appName(appName)\
-                        .config("spark.jars.packages", "com.datastax.spark:spark-cassandra-connector_2.11:2.3.2")\
-                        .config("spark.cassandra.connection.host", "127.0.0.1")\
+                        .appName(appName) \
+                        .config("spark.jars.packages", "com.datastax.spark:spark-cassandra-connector_2.11:2.3.2") \
+                        .config("spark.cassandra.connection.host", "172.3.3.11") \
                         .getOrCreate()
 
     return spark
 
 
 def run_abraom_etl():
-    FILE_PATH = "../data/hg19_abraom.txt"
+    FILE_PATH = "../data-spark/hg19_abraom.txt"
     spark = get_spark_session("Annovar Abraom ETL")
 
     hg19_abraom = spark.read.csv(FILE_PATH, header=True, sep="\t")
+
     hg19_abraom.createOrReplaceTempView("hg19_abraom")
 
     hg19_abraom = spark.sql("SELECT `#Chr` AS chromosome, \
@@ -30,7 +31,7 @@ def run_abraom_etl():
     hg19_abraom.write\
                .format("org.apache.spark.sql.cassandra")\
                .mode("append")\
-               .options(table="hg19_abraom", keyspace="sequence_databases")\
+               .options(table="hg19_abraom", keyspace="ha_bioinformatica")\
                .save()
 
     spark.stop()

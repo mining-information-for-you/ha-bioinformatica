@@ -1,0 +1,25 @@
+version: '3'
+networks:
+  ha-bioinfo:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.3.3.0/24
+services:
+  cassandra:
+    image: cassandra:3.11.3
+    container_name: ha_bioinformatica_cassandra
+    ports:
+      - 9042:9042
+      - 7199:7199
+      - 9160:9160
+    restart: always
+    volumes:
+      - ./data-cassandra:/var/lib/cassandra
+      - ./cassandra/ha_bioinformatica.cql:/ha_bioinformatica.cql
+      - ./cassandra-init.sh:/cassandra-init.sh
+    command: sh /cassandra-init.sh
+    networks:
+      ha-bioinfo:
+          ipv4_address: 172.3.3.11
