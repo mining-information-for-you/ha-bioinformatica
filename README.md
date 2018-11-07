@@ -10,6 +10,7 @@
 dados Cassandra.
 
 `[nome_dataset]/data-spark`: Nesse diretório serão armazenados os datasets à serem processados.
+
 `[nome_dataset]/data-cassandra`: Nesse diretório serão armazenados os dados processados no cassandra.
 
 ## Como utilizar
