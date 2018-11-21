@@ -1,6 +1,8 @@
 .idea/
 annovar/data/
 metastore_db/
+annovar/data-spark
+annovar/data-cassandra
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

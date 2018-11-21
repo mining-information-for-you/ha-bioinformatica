@@ -15,18 +15,24 @@ dados Cassandra.
 
 ## Como utilizar
 
-Realize o download do [Miniconda](https://conda.io/miniconda.html), [Docker](https://docs.docker.com/install/) e [Docker Compose](https://docs.docker.com/compose/install/) de acordo com o sistema operacional utilizado; após o download execute os comandos abaixo:
+Realize o download do [Docker](https://docs.docker.com/install/); após o download execute os comandos abaixo:
 
 ```bash
-$ cd [nome_dataset]
-$ conda env create -f [nome_dataset].yml
-$ docker-compose up
-$ source activate [nome_dataset]
+$ docker un --name cassandra -p 9042:9042 -v /path/to/data-cassandra:/var/lib/cassandra --rm -d mi4u/annovar:0.0.1-rc
+$ docker run -it --link cassandra:cassandra --rm mi4u/annovar:0.0.1-rc cqlsh cassandra -f /cassandra_scripts/ha_bioinformatica.cql
+$ screen
+$ docker run -it --name annovar --link cassandra:cassandra --rm mi4u/annovar:0.0.1-rc /bin/bash
+$ spark-submit --packages datastax:spark-cassandra-connector:2.3.1-s_2.11 --conf spark.cassandra.connection.host=[CassandraIP] /annovar_scripts/[nome_script].py 
 ```
 
-Após executar os comandos acima o seu ambiente estará pronto para execução dos scripts ETL, para executar os scripts basta seguir o modelo abaixo:
+Onde `[CassandraIP]` deve ser substituido pelo endereço IP do container rodando o cassandra, podemos identificar essa informação com o seguinte comando:
 
 ```bash
-$ cd src
-$ python [nome_script]_etl.py
+$ docker inspect cassandra | grep -m1 \"IPAddress\":
 ```
+
+e o `[nome_script].py` deve ser o nome de uns dos scripts localizados dentro da pasta `annovar_scripts` no container.
+
+O passo referente ao *screen* é importante para não perdermos as atividades que estão sendo executadas no container caso precisemos nos desconectador do servidor.
+Para dar `detach` na sessão *screen* é só apertar CTRL + A e CTRL + D de uma vez. Para conectar novamente na sessão, veja as sessões abertas com `screen -ls` e após isso
+conecte com `screen -r [numero_sessao]`.
