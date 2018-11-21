@@ -28,7 +28,7 @@ $ spark-submit --packages datastax:spark-cassandra-connector:2.3.1-s_2.11 --conf
 Onde `[CassandraIP]` deve ser substituido pelo endereço IP do container rodando o cassandra, podemos identificar essa informação com o seguinte comando:
 
 ```bash
-$docker inspect cassandra | grep -m1 \"IPAddress\":
+$ docker inspect cassandra | grep -m1 \"IPAddress\":
 ```
 
 e o `[nome_script].py` deve ser o nome de uns dos scripts localizados dentro da pasta `annovar_scripts` no container.
