@@ -1,4 +1,0 @@
-name: annovar
-dependencies:
-  - python==3.6
-  - pyspark==2.3.1
